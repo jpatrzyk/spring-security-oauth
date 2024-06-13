@@ -11,7 +11,7 @@ import { FooComponent } from './foo.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    FooComponent    
+    FooComponent
   ],
   imports: [
     BrowserModule,

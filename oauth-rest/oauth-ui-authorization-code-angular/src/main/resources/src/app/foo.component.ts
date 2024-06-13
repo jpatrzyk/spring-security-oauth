@@ -3,9 +3,9 @@ import {AppService, Foo} from './app.service'
 
 @Component({
   selector: 'foo-details',
-  providers: [AppService],  
+  providers: [AppService],
   template: `<div class="container">
-    <h1 class="col-sm-12">Foo Details</h1>
+    <h1 class="col-sm-12">Customers Details</h1>
     <div class="col-sm-12">
         <label class="col-sm-3">ID</label> <span>{{foo.id}}</span>
     </div>
@@ -13,21 +13,23 @@ import {AppService, Foo} from './app.service'
         <label class="col-sm-3">Name</label> <span>{{foo.name}}</span>
     </div>
     <div class="col-sm-12">
-        <button class="btn btn-primary" (click)="getFoo()" type="submit">New Foo</button>        
+        <button class="btn btn-primary" (click)="getFoo()" type="submit">GET Customers</button>
     </div>
 </div>`
 })
 
 export class FooComponent {
-    public foo = new Foo(1,'sample foo');
-    private foosUrl = 'http://localhost:8081/resource-server/api/foos/';  
+    public foo = new Foo('1', 'sample foo');
+    private foosUrl: string
 
-    constructor(private _service:AppService) {}
+    constructor(private _service: AppService) {
+      this.foosUrl = this._service.resourceServerBaseUrl + '/customers';
+    }
 
-    getFoo(){
-        this._service.getResource(this.foosUrl+this.foo.id)
+    getFoo() {
+        this._service.getResource(this.foosUrl)
          .subscribe(
-                     data => this.foo = data,
+                     data => this.foo = data[0],
                      error =>  this.foo.name = 'Error');
     }
 }

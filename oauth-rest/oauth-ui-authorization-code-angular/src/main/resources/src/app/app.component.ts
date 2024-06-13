@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
- 
+
 @Component({
     selector: 'app-root',
     template: `<nav class="navbar navbar-default">
